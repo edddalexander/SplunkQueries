@@ -85,3 +85,15 @@ error OR failed OR severe OR ( sourcetype=access_* ( 404 OR 500 OR 503 ) )
 
 GamesEndpointRest AND NOT (ThirdPartyContributionsToBonusGame OR Hazelcast OR (DeadlockLoserDataAccessException OR GameStateJDBCImpl OR org.springframework.dao.CannotAcquireLockException OR DataAccessResourceFailureException OR "Can not find next group id using sequence" OR "Error when recording game event" OR "Can not find next game reference using sequence GAME_REFERENCE_SEQUENCE" OR "org.springframework.dao.ConcurrencyFailureException: PreparedStatementCallback; SQL [UPDATE BANK SET AMOUNT" OR "Connection is closed. ERRORCODE=-4470, SQLSTATE=08003") OR UpdateFriendzyDataRequestEventHandler OR "gamesys.guest.GuestSubException: Error deserializing game state" OR SelfPopulatingCache OR CommsManagerException OR handleBonusGame OR "No more picks allowed today" OR "This location has already been picked" OR "No ManagedConnections available within configured blocking timeout" OR ("GamesEndpointRest.progressives" AND "Read timed out") OR (MemberProfileEndpointProxy AND "Read timed out") OR (InsufficientFundsException OR "Player has insufficient Balance or Bonus") OR "No enum const class gamesys.games.GameSkin.null" OR bingo OR ("http://liquidity-service" OR LiquidityRemoteEndpointImpl) OR "RewardSpin Event cannot be called as there are no reward spin available for gameSkin" OR gamesys.games.specialfree.game2.handler.HandshakeEventHandler.initialiseGameState OR gamesys.member.sub.exception.MemberAccountClosedException OR 	
 IncompatibleCashAmountException) source="/home/jboss/server/default/log/server.log"
+
+
+SQLCODE host = "*PPC1" | eval SQLCODE = case(eventtype == "SQLCODE=-911 ", "deadlock or timeout", eventtype == "SQLCODE=-302", "cursor not open") | stats count by SQLCODE
+
+SQLCODE=-911 deadlock or timeout causes roleback
+
+NumberFormatException
+
+exception.MemberNotInGroupException host = "*PPC1"  earliest=-6d@d+270m latest=-6d@d+330m | timechart count as total| append [search exception.MemberNotInGroupException host = "*PPC1"   earliest=-5d@d+270m latest=-5d@d+330m| timechart count as total]| append [search exception.MemberNotInGroupException host = "*PPC1"  earliest=-4d@d+270m latest=-4d@d+330m | timechart count as total] | append [search exception.MemberNotInGroupException host = "*PPC1"  earliest=-3d@d+270m latest=-3d@d+330m|timechart count as total] | append [search exception.MemberNotInGroupException host = "*PPC1"  earliest=-2d@d+270m latest=-2d@d+330m| timechart count as total] | append [search exception.MemberNotInGroupException host = "*PPC1"  earliest=-1d@d+270m latest=-1d@d+330m| timechart count as total] | append [search exception.MemberNotInGroupException host = "*PPC1"  earliest=@d+270m latest=@d+330m| timechart count as total]
+
+
+error OR failed OR severe OR ( sourcetype=access_* ( 404 OR 500 OR 503 ) )
