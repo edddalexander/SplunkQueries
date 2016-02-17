@@ -1,0 +1,87 @@
+
+exception host != "*PPC10" earliest="12/24/2015:04:30:00" latest="12/24/2015:05:30:00"| timechart count as total| append [search exception host != "*PPC10" earliest=-120 latest=-60 | timechart count as total] | append [search exception host != "*PPC10" earliest=-180 latest=-120 |timechart count as total] | append [search exception host != "*PPC10" earliest=-240 latest=-180 | timechart count as total] | append [search exception host != "*PPC10" earliest=-300 latest=-240| timechart count as total]
+
+
+
+
+
+
+
+
+2015-11-02 17:19:09,770 org:ppc1 env:mlt3 api:messageboard-author-api-v2 rev:1  NIOThread@0 ERROR A.HTTP.CONFIGURATION - MessageProcessorHttpSkeletonFactory$FlowCompletionListener.onFinish() : Message id:bar00.ppc1.mlt3.gamesys.local_BT0HGxnc_RouterProxy-2-58184_1948, Exception while sending the response: {}
+java.lang.NullPointerException: null
+File does not exist
+
+2015-11-04 13:55:49,677 INFO  [STDOUT] [ERROR] exchangesimple.SimpleSyndicator Not able to send the deactivation request [http://app01.ppc2:8080/.magnolia/activation]: Server returned HTTP response code: 500 for URL: http://app01.ppc2:8080/.magnolia/activation
+info.magnolia.cms.exchange.ExchangeException: Not able to send the deactivation request [http://app01.ppc2:8080/.magnolia/activation]: Server returned HTTP response code: 500 for URL: http://app01.ppc2:8080/.magnolia/activation
+	at info.magnolia.module.exchangesimple.SimpleSyndicator.doDeactivate(SimpleSyndicator.java:296)
+	at info.magnolia.module.exchangesimple.SimpleSyndicator$3.run(SimpleSyndicator.java:256)
+	at EDU.oswego.cs.dl.util.concurrent.PooledExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Thread.java:744)
+
+2015-11-04 13:55:49,678 INFO  [STDOUT] [ERROR] commands.MgnlCommand Exception caught during deactivation.
+info.magnolia.cms.exchange.ExchangeException: 4 errors detected: 
+Not able to send the deactivation request [http://app04.ppc2:8080/.magnolia/activation]: Server returned HTTP response code: 500 for URL: http://app04.ppc2:8080/.magnolia/activation on app04.ppc2
+Not able to send the deactivation request [http://app03.ppc2:8080/.magnolia/activation]: Server returned HTTP response code: 500 for URL: http://app03.ppc2:8080/.magnolia/activation on app03.ppc2
+Not able to send the deactivation request [http://app02.ppc2:8080/.magnolia/activation]: Server returned HTTP response code: 500 for URL: http://app02.ppc2:8080/.magnolia/activation on app02.ppc2
+Not able to send the deactivation request [http://app01.ppc2:8080/.magnolia/activation]: Server returned HTTP response code: 500 for URL: http://app01.ppc2:8080/.magnolia/activation on app01.ppc2
+
+front end deposit
+
+Caused by: com.ibm.db2.jcc.a.en: [jcc][t4][2030][11211][3.52.95] A communication error occurred during operations on the connection's underlying socket, socket input stream, 
+or socket output stream. Error location: Reply.fill(). Message: Connection timed out. ERRORCODE=-4499, SQLSTATE=08001
+just search on splunk on ppc1, createNewCard
+u will see loads of communicatione rror
+errors
+
+Need couple of common database errors
+
+classpath:gamesys/chimera/toolbox/pages/ChimeraPropertyDisplayBlocks.tml NOT host=srch* NOT host="log*" | convert timeformat="%Y-%m-%d" ctime(_time) AS date | stats count by date
+
+RenderQueueException host = "*PPC2" | convert timeformat="%Y-%m-%d" ctime(_time) AS date | stats count by date
+
+RenderQueueException
+
+java.util.concurrent.RejectedExecutionException host = "*PPC2" this occured on 4th December on PPC2 on bng10
+
+ERROR - General Exception when reading JMS JackpotInfo:  - Bingo broadcaster restart?
+
+"ReferAFriendDaoImpl.getAllReferAFriendReferrals" RAF error found onlive unclear if its happening on PPC2 INCIDENT81
+
+from INCIDENT-74 java.net.MalformedURLException some INCIDENTS on PPC2
+
+index=jbosslogs host=*ppc1 source="/home/unc/log/app.log" RunTimeExceptionMapper - UNC performance type error
+
+InvalidUserCredentialsExceptionMapper maybe use to check for login details
+
+| convert timeformat="%d-%m-%y" ctime(_time) AS date | where ( date > '21/12/2015' AND date <'22/12/2015' ) 
+
+| where ( time > '21/12/2015 00:00:00' AND time <'22/12/2015 00:00:00' ) 
+
+
+
+
+exception host = "*PPC2" earliest=-60 latest=-10 | stats stats count(exception) by events| append [search exception host = "*PPC2" earliest=-120 latest=-60 | stats count(exception) by events] | append [search exception host = "*PPC2" earliest=-180 latest=-120 | stats count(exception) by events] | append [search exception host = "*PPC2" earliest=-180 latest=-120 | stats count(exception) by events]
+
+
+exception earliest="12/24/2015:04:30:00" latest="12/24/2015:05:30:00"
+
+error host = "*PPC1" | eval error = case(eventtype == "RenderQueueException", "Publishing", eventtype == "FatalHttpClientException", "Client") | stats count by error
+
+
+
+SQLCODE host = "*PPC1" | eval SQLCODE = case(eventtype == "SQLCODE=-911 ", "deadlock or timeout", eventtype == "SQLCODE=-302", "cursor not open") | stats count by SQLCODE
+
+SQLCODE=-911 deadlock or timeout causes roleback
+
+NumberFormatException
+
+exception.MemberNotInGroupException host = "*PPC1"  earliest=-6d@d+270m latest=-6d@d+330m | timechart count as total| append [search exception.MemberNotInGroupException host = "*PPC1"   earliest=-5d@d+270m latest=-5d@d+330m| timechart count as total]| append [search exception.MemberNotInGroupException host = "*PPC1"  earliest=-4d@d+270m latest=-4d@d+330m | timechart count as total] | append [search exception.MemberNotInGroupException host = "*PPC1"  earliest=-3d@d+270m latest=-3d@d+330m|timechart count as total] | append [search exception.MemberNotInGroupException host = "*PPC1"  earliest=-2d@d+270m latest=-2d@d+330m| timechart count as total] | append [search exception.MemberNotInGroupException host = "*PPC1"  earliest=-1d@d+270m latest=-1d@d+330m| timechart count as total] | append [search exception.MemberNotInGroupException host = "*PPC1"  earliest=@d+270m latest=@d+330m| timechart count as total]
+
+NOCs general error used on backend(?)
+error OR failed OR severe OR ( sourcetype=access_* ( 404 OR 500 OR 503 ) )
+
+
+
+GamesEndpointRest AND NOT (ThirdPartyContributionsToBonusGame OR Hazelcast OR (DeadlockLoserDataAccessException OR GameStateJDBCImpl OR org.springframework.dao.CannotAcquireLockException OR DataAccessResourceFailureException OR "Can not find next group id using sequence" OR "Error when recording game event" OR "Can not find next game reference using sequence GAME_REFERENCE_SEQUENCE" OR "org.springframework.dao.ConcurrencyFailureException: PreparedStatementCallback; SQL [UPDATE BANK SET AMOUNT" OR "Connection is closed. ERRORCODE=-4470, SQLSTATE=08003") OR UpdateFriendzyDataRequestEventHandler OR "gamesys.guest.GuestSubException: Error deserializing game state" OR SelfPopulatingCache OR CommsManagerException OR handleBonusGame OR "No more picks allowed today" OR "This location has already been picked" OR "No ManagedConnections available within configured blocking timeout" OR ("GamesEndpointRest.progressives" AND "Read timed out") OR (MemberProfileEndpointProxy AND "Read timed out") OR (InsufficientFundsException OR "Player has insufficient Balance or Bonus") OR "No enum const class gamesys.games.GameSkin.null" OR bingo OR ("http://liquidity-service" OR LiquidityRemoteEndpointImpl) OR "RewardSpin Event cannot be called as there are no reward spin available for gameSkin" OR gamesys.games.specialfree.game2.handler.HandshakeEventHandler.initialiseGameState OR gamesys.member.sub.exception.MemberAccountClosedException OR 	
+IncompatibleCashAmountException) source="/home/jboss/server/default/log/server.log"
