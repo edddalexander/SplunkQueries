@@ -1,6 +1,8 @@
 
 exception host != "*PPC10" earliest="12/24/2015:04:30:00" latest="12/24/2015:05:30:00"| timechart count as total| append [search exception host != "*PPC10" earliest=-120 latest=-60 | timechart count as total] | append [search exception host != "*PPC10" earliest=-180 latest=-120 |timechart count as total] | append [search exception host != "*PPC10" earliest=-240 latest=-180 | timechart count as total] | append [search exception host != "*PPC10" earliest=-300 latest=-240| timechart count as total]
 
+INCIDENT145
+AccountFundsExceededException
 
 
 
