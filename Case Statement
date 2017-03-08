@@ -1,1 +1,0 @@
-SQLCODE host = "*PPC1" | eval SQLCODE = case(eventtype == "SQLCODE=-911 ", "deadlock or timeout", eventtype == "SQLCODE=-302", "cursor not open") | stats count by SQLCODE
